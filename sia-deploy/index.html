@@ -79,6 +79,13 @@
     <div class="col-sm-9 col-md-6 col-lg-8" id="form-summary">
       <form style="margin: 30px 30px 30px 30px"> 
       <div class="form-group">
+        <label for="exampleInputEmail1" class="col-6">Seat Number</label>
+          <div class="col-6">
+            <input type="email" class="form-control" id="exampleInputSeatNumber1" aria-describedby="emailHelp" value="3A" disabled="">
+          </div>
+      </div>
+
+      <div class="form-group">
         <label for="exampleInputEmail1" class="col-6">Defect Summary</label>
           <div class="col-6">
             <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="Tray Table Latch Broken" disabled="">
@@ -86,12 +93,13 @@
       </div>
       <div class="form-group">
         <label for="exampleSelect1">Status</label>
-        <select class="form-control" id="exampleSelect1" disabled="">
+        <input type="email" class="form-control" id="exampleInputStatus1" aria-describedby="emailHelp" value="Not Fixed" disabled=""> 
+<!--         <select class="form-control" id="exampleSelect1" disabled="">
           <option>Not Fixed</option>
           <option>In Progress</option>
           <option>Deferred for Future Maintenanace</option>
           <option>Fixed</option>
-        </select>
+        </select> -->
       </div>
       <div class="form-group">
         <label for="exampleTextarea">Detailed Description</label>
@@ -144,18 +152,26 @@
   <div class="row">
     <div class="col-sm-1 col-md-1 col-lg-1"></div>
 
-    <div class="col-sm-3 col-md-6 col-lg-4">
+    <div class="col-sm-3 col-md-6 col-lg-4" id="form-summary-2">
       <form style="margin: 30px 30px 30px 30px"> 
+
       <div class="form-group">
-        <label for="exampleInputEmail1" class="col-6">Defect Summary</label>
+        <label for="exampleInputSeatNumber2" class="col-6">Seat Number</label>
           <div class="col-6">
-            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Give a short summary of the defect">
+            <input type="email" class="form-control" id="exampleInputSeatNumber2" aria-describedby="emailHelp" placeholder="Seat Number">
+          </div>
+      </div>
+
+      <div class="form-group">
+        <label for="exampleInputEmail2" class="col-6">Defect Summary</label>
+          <div class="col-6">
+            <input type="email" class="form-control" id="exampleInputEmail2" aria-describedby="emailHelp" placeholder="Give a short summary of the defect">
           </div>
       </div>
       <div class="form-group" >
         <div class="col-10">
           <label for="exampleInputPassword1">Action Taken</label>
-          <input type="password" class="form-control" id="exampleInputPassword1" placeholder="State what action was taken">
+          <input type="password" class="form-control" id="exampleInputPassword2" placeholder="State what action was taken">
         </div>
       </div>
       <div class="form-group">
@@ -168,8 +184,8 @@
         </select>
       </div>
       <div class="form-group">
-        <label for="exampleTextarea">Detailed Description</label>
-        <textarea class="form-control" id="exampleTextarea" rows="3" placeholder="Please describe any details of the defect"></textarea>
+        <label for="exampleTextarea2">Detailed Description</label>
+        <textarea class="form-control" id="exampleTextarea2" rows="3" placeholder="Please describe any details of the defect"></textarea>
       </div>
       <div class="form-group">
         <label for="exampleInputFile">Upload Picture</label>
@@ -305,6 +321,7 @@
             <li id="modal-item-1">Tray Table Latch Broken</li>
             <li id="modal-item-2">Status: Not Fixed</li>
             <li id="modal-item-3">There is a long, wide crack in the latch of the tray table. It is still able to hold up the tray table, however is very weak and should be fixed ASAP. </li>
+            <li id="defect-id" style="display:none"></li> 
           </ul>
         </ul>
       </div>
@@ -362,8 +379,9 @@ $('tr').click( function(e) {
 
     var defectId = $(e.target.closest('tr')).attr('class').split('defectData')[1];
     $("#exampleInputEmail1").val(defectData[defectId][2]);
-    // $("#exampleSelect1").val(defectData[defectId][3]);
+    $("#exampleInputStatus1").val(defectData[defectId][3]);
     $("#exampleTextarea").val(defectData[defectId][4]);
+    $("#exampleInputSeatNumber1").val(defectData[defectId][0]);    
     
     $("#form-summary").fadeIn('fast');
 
@@ -372,12 +390,31 @@ $('tr').click( function(e) {
 
 /////// Listener 2 //////
 $('#update-button').click( function(e) {
-    console.log('update button clicked')
+    console.log('update button clicked')    
     // $('#myTab a[href="#defect-detail"]').tab('show');
     setTimeout(function(){ 
       $('#defect-detail-page').trigger('click');
+      // $('#defect-detail-page').attr('style') = 'display: none;';
+  $( "#form-summary-2" ).animate({
+    opacity: 0
+  }, 1, function() {
+
+    var defectId = $('#defect-id').html();
+    $("#exampleInputEmail2").val(defectData[defectId][2]);
+    $("#exampleInputStatus2").val(defectData[defectId][3]);
+    $("#exampleTextarea2").val(defectData[defectId][4]);
+    $("#exampleInputSeatNumber2").val(defectData[defectId][0]);          
+
+    // Animation complete.
+    $( "#form-summary-2" ).animate({ 
+      opacity: 1
+    }, 1000, function(){
+
+    });   
+  });
+
       console.log('test');
-    }, 1000);
+    }, 500);
 });
 
 
@@ -423,7 +460,7 @@ $('#update-button').click( function(e) {
               info2   : 'some info here 2',
               info3   : 'some info here 3',
               classes : 'priority-1', //your custom CSS class
-              category: 'Priority One'
+              category: 'Low Priority Defect/Deferred'
             },
             e: {
               info1   : 'some info here 1',
@@ -444,7 +481,7 @@ $('#update-button').click( function(e) {
             node : $('#legend'),
               items : [
               [ 'f', 'tofix', 'High Priority Defect'],
-              [ 'f', 'available',   'Priority One' ],              
+              [ 'f', 'available',   'Low Priority Defect/Deferred' ],              
               [ 'e', 'available',   'No Defect']              
               ]         
           },
@@ -458,6 +495,9 @@ $('#update-button').click( function(e) {
               $('#modal-item-1').html(defectx[2]);
               $('#modal-item-2').html('Status: ' + defectx[3]);
               $('#modal-item-3').html(defectx[4]);
+
+
+              $('#defect-id').html(randomNumber);
 
 
 
@@ -480,7 +520,7 @@ $('#update-button').click( function(e) {
                * 'selected'. This is why we have to add 1 to the length and the current seat price to the total.
                */
               
-              // return 'selected';
+              return 'selected';
             } else if (this.status() == 'selected') {
             
               //remove the item from our cart
