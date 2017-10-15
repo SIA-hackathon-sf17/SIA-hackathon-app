@@ -76,7 +76,7 @@
       </div>
     </div>
 
-    <div class="col-sm-9 col-md-6 col-lg-8">
+    <div class="col-sm-9 col-md-6 col-lg-8" id="form-summary">
       <form style="margin: 30px 30px 30px 30px"> 
       <div class="form-group">
         <label for="exampleInputEmail1" class="col-6">Defect Summary</label>
@@ -323,7 +323,11 @@
 </body>
 
 <script src="https://cdn.rawgit.com/ethereum/web3.js/develop/dist/web3.js"></script>
-<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
+<!-- <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script> -->
+<script
+  src="https://code.jquery.com/jquery-3.2.1.js"
+  integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+  crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 <script src="./index.js"></script>
 <script src="./jquery.seat-charts.js"></script>
@@ -352,22 +356,30 @@
         ['14C', 'defect5', 'Foot Rest Broken', 'Not Fixed', 'The left hinge on the foot rest is broken, causing it to be slanted to one side', 'additional info here'],        
       ]
 
+/////// Listener 1 //////
 $('tr').click( function(e) {
-  var defectId = $(this).attr("class").split('defectData')[1];
-  $("#exampleInputEmail1").val(defectData[defectId][2]);
-  // $("#exampleSelect1").val(defectData[defectId][3]);
-  $("#exampleTextarea").val(defectData[defectId][4]);
+  $("#form-summary").fadeOut('fast', function(){
+
+    var defectId = $(e.target.closest('tr')).attr('class').split('defectData')[1];
+    $("#exampleInputEmail1").val(defectData[defectId][2]);
+    // $("#exampleSelect1").val(defectData[defectId][3]);
+    $("#exampleTextarea").val(defectData[defectId][4]);
+    
+    $("#form-summary").fadeIn('fast');
+
+  });
 });
 
+/////// Listener 2 //////
 $('#update-button').click( function(e) {
-  console.log('update button clicked')
-  // $('#myTab a[href="#defect-detail"]').tab('show');
-  setTimeout(function(){ 
-    $('#defect-detail-page').trigger('click');
-    console.log('test');
-  }, 1000);
-
+    console.log('update button clicked')
+    // $('#myTab a[href="#defect-detail"]').tab('show');
+    setTimeout(function(){ 
+      $('#defect-detail-page').trigger('click');
+      console.log('test');
+    }, 1000);
 });
+
 
 
         var dataset = [
