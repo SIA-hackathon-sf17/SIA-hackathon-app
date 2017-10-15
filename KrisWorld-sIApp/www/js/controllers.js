@@ -26,6 +26,8 @@ function ($scope, $stateParams) {
             freq_flyer_id: '1234567890'
           }
           $scope.submitting = false;
+          
+    })
 }])
    
 .controller('ratingCtrl', ['$scope', '$stateParams', 
