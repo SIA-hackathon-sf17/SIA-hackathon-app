@@ -33,7 +33,26 @@ let defectDataHeader = ['Seat Number', 'Name', 'Type', 'Info1', 'Info2', 'Info3'
         ['6J', 'defect3', 'Seat Cushion Stained', 'Not Fixed', 'All the seat cushions are dirty due to a passenger vommitting on it. ', 'additional info here'],
         ['14B', 'defect4', 'Entertainment System Not Working', 'Not Fixed', 'Unable to turn on or power up entertainment system. ', 'additional info here'],
         ['14C', 'defect5', 'Foot Rest Broken', 'Not Fixed', 'The left hinge on the foot rest is broken, causing it to be slanted to one side', 'additional info here'], 
-               
+
+      ]
+
+let staticDataHeader = ['LIST OF DEFECTS', '# OF SEATS AFFECTED', 'PRIORITY', 'TOTAL DESIGNATED TIME', 'Post Repair Mandatory Inspection?', 'Cross-Team collaboration Needed?', 'Replacement Parts Available?', '% Completed'];
+      let staticData = [
+['SEAT BELT STUCK', '5', 'HIGH',  '120 MIN', 'Yes', 'No',  'Yes', '0%'],
+['BROKEN TABLE TRAY', '10' , '1' ,'30 MIN',  'No' , 'No' , 'Yes' ,'0%'],
+['ARMREST DEFECT',  '1', '2', '10 MIN' , 'No' , 'No' , 'No' , '0%'],
+['NO RECLINING' , '2', '2' ,'30 MIN' , 'No' , 'No' , 'No'  ,'0%'],
+['LOOSE HEADREST' , '1', '1' ,'15 MIN' , 'No' , 'No' , 'No' , '0%'],
+      ]      
+
+      let staticDataHeader2 = ['SKU', ' Quantity'  ,'Description' ,'Model' ,'Warehouse order#', 'Inventory Manager'];
+
+      let staticData2 = [
+['SP7875' , '1' ,'CUP HOLDER'  ,'LC1246-10' ,'SIN 00456', 'Fong, Charlie'],
+['TR87680', '3', 'TRAY TABLE',  'SIM6753-98',  'SIN 00456', 'Fong, Charlie'],
+['MK676554' , '40',  '5" SCREWS' , 'N/A' ,'SIN 00456' ,'Fong, Charlie'],
+['YE98767', '8', 'TRAY TABLE LATCH',  'CA5609',  'SIN 00456', 'Fong, Charlie'],
+['XR23423', '1' ,'SEAT BELT' ,'POI8765-14'  ,'SIN 00456' ,'Fong, Charlie']
       ]
 
 function voteForCandidate() {
@@ -219,6 +238,43 @@ function getDefectList2(){
 }
 
 
+function getStaticList(){
+    let str = '<tr style="background-color: #24223d;color: white;font-weight: 500;">';
+    for(let j=0; j<staticDataHeader.length; j++){
+      str +="<td style='text-align:center;'>" + staticDataHeader[j] + "</td>"
+    }
+    str+='</tr>';
+    $("#static-data-header").append(str);
+
+  for(let i=0; i < staticData.length; i++){
+    let str = '<tr class="staticData' + i.toString() +'"s>';
+    for(let j=0; j<staticData[i].length; j++){
+      str +="<td style='text-align:center;'>" + staticData[i][j] + "</td>"
+    }
+    str+='</tr>';
+    $("#static-data").append(str);
+  }  
+}
+
+function getStaticList2(){
+    let str = '<tr style="background-color: #24223d;color: white;font-weight: 500;">';
+    for(let j=0; j<staticDataHeader2.length; j++){
+      str +="<td style='text-align:center;'>" + staticDataHeader2[j] + "</td>"
+    }
+    str+='</tr>';
+    $("#static-data-header2").append(str);
+
+  for(let i=0; i < staticData2.length; i++){
+    let str = '<tr class="staticData' + i.toString() +'"s>';
+    for(let j=0; j<staticData2[i].length; j++){
+      str +="<td style='text-align:center;'>" + staticData2[i][j] + "</td>"
+    }
+    str+='</tr>';
+    $("#static-data2").append(str);
+  }  
+}
+
+
 $(document).ready(function() {
   // candidateNames = Object.keys(candidates);
   // for (var i = 0; i < candidateNames.length; i++) {
@@ -229,5 +285,7 @@ $(document).ready(function() {
 
   // populateCandidates();
   // populateAccounts();
+  getStaticList();
+  getStaticList2();
   getDefectList2();
 });
