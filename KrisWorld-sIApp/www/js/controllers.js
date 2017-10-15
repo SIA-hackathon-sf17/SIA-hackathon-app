@@ -43,6 +43,7 @@ function ($scope, $stateParams) {
             rating: '4'
           }
           $scope.submitting = false;
+  })
 
 }])
    
