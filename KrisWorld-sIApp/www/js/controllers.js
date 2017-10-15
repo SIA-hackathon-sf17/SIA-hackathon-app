@@ -8,7 +8,9 @@ function ($scope, $stateParams) {
 }])
    
 .controller('signupCtrl', ['$scope', '$stateParams', 
-function ($scope, $stateParams) {
+function ($scope, $stateParams, $firebase) {
+    var fireRef = new Firebase("https://siapp-6a1ac.firebaseio.com");
+    $scope.review = $firebase(fireRef).$asArray();
     $scope.data = {
         name: 'mona',
         email: 'mona@example.com',
@@ -31,7 +33,9 @@ function ($scope, $stateParams) {
 }])
    
 .controller('ratingCtrl', ['$scope', '$stateParams', 
-function ($scope, $stateParams) {
+function ($scope, $stateParams, $firebase) {
+    var fireRef = new Firebase("https://siapp-6a1ac.firebaseio.com");
+    $scope.review = $firebase(fireRef).$asArray();
     $scope.data = {
       rating: '4'
     }
