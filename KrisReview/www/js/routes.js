@@ -27,10 +27,10 @@ angular.module('app.routes', [])
     controller: 'ratingCtrl'
   })
 
-  .state('continue', {
+  .state('thankYou', {
     url: '/page5',
-    templateUrl: 'templates/continue.html',
-    controller: 'continueCtrl'
+    templateUrl: 'templates/thankYou.html',
+    controller: 'thankYouCtrl'
   })
 
   .state('feedback', {
@@ -93,10 +93,10 @@ angular.module('app.routes', [])
     controller: 'page10Ctrl'
   })
 
-  .state('finished', {
+  .state('done', {
     url: '/page16',
-    templateUrl: 'templates/finished.html',
-    controller: 'finishedCtrl'
+    templateUrl: 'templates/done.html',
+    controller: 'doneCtrl'
   })
 
 $urlRouterProvider.otherwise('/page1')
