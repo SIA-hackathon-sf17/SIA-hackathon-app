@@ -9,13 +9,40 @@ function ($scope, $stateParams) {
    
 .controller('signupCtrl', ['$scope', '$stateParams', 
 function ($scope, $stateParams) {
+    $scope.data = {
+        name: 'mona',
+        email: 'mona@example.com',
+        freq_flyer_id: '1234567890'
+    }
 
-
+    $scope.submitting = false;
+    
+    $scope.submit = function(){
+        $scope.submitting = true;
+        signupCtrl.add($scope.data).then(function(){
+          $scope.data = {
+            name: 'mona',
+            email: 'mona@example.com',
+            freq_flyer_id: '1234567890'
+          }
+          $scope.submitting = false;
 }])
    
 .controller('ratingCtrl', ['$scope', '$stateParams', 
 function ($scope, $stateParams) {
+    $scope.data = {
+      rating: '4'
+    }
 
+    $scope.submitting = false;
+    
+    $scope.submit = function(){
+        $scope.submitting = true;
+        ratingCtrl.add($scope.data).then(function(){
+          $scope.data = {
+            rating: '4'
+          }
+          $scope.submitting = false;
 
 }])
    
