@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Hello World DApp</title>
+  <link rel="stylesheet" href='./jquery.seat-charts.css'>
+  <link rel="stylesheet" href='./app.css'>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+  <link href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' rel='stylesheet' type='text/css'>
+  <style>
+    .margin-top-3 {
+      margin-top: 3em;
+    }
+  </style>
+</head>
+<body class="container">
+<div id="header1">
+      <div class="header image"></div>
+      <ul id="top-nav-bar">
+        <li><a href="#home">Aircraft</a></li>
+        <li><a href="#news">Flight Number</a></li>
+        <li><a href="#contact">Date</a></li>
+        <li><a href="#about">&nbsp&nbsp&nbsp&nbspLast Route</a></li>
+        <li><a href="#news">Last Arrival Time</a></li>
+        <li><a href="#contact">Next Departure Time</a></li>  
+      </ul>
+      <ul id="top-nav-bar2" style="margin-top: -25px">
+        <li><a href="#home">A320-200</a></li>
+        <li><a href="#news">SQ 561</a></li>
+        <li><a href="#contact">10/14/2017</a></li>
+        <li><a href="#about">SFO-SIN</a></li>
+        <li><a href="#news">&nbsp&nbsp&nbspFriday 21:20</a></li>
+        <li><a href="#contact">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspSaturday </a></li>
+      </ul>      
+</div>
+<div id="bodycontainer">
+  <!-- <h1>SIA App Challenge</h1> -->
+
+
+
+
+<!-- Nav tabs -->
+<ul class="nav nav-tabs" role="tablist" style="background-color: #3e3e42">
+  <li class="nav-item">
+    <a class="nav-link active" data-toggle="tab" href="#defect-list" role="tab" style="color:white">Defect List</a>
+  </li> 
+  <li class="nav-item">
+    <a class="nav-link" data-toggle="tab" href="#plane-layout" role="tab" style="color:white">Plane Layout</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="defect-detail-page" data-toggle="tab" href="#defect-detail" role="tab" style="color:white">Defect Detail</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" data-toggle="tab" href="#settings" role="tab" style="color:white"></a>
+  </li>
+</ul>
+
+<!-- Tab panes -->
+<div class="tab-content">
+
+  <!-- Defect List -->
+  <div class="tab-pane active" id="defect-list" role="tabpanel">
+
+    <!-- <h2>Defect List</h2> -->
+  <div class="row">
+    <div class="col-sm-3 col-md-6 col-lg-4">
+
+      <div class="table-responsive" style="margin: 0px 30px 30px 0px">
+        <table class="table table-bordered" style="background-color: white;">
+          <thead id="defect-list-header">
+            <tr>
+            </tr>
+          </thead>
+          <tbody id="defect-rows-airline">
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="col-sm-9 col-md-6 col-lg-8">
+      <form style="margin: 30px 30px 30px 30px"> 
+      <div class="form-group">
+        <label for="exampleInputEmail1" class="col-6">Defect Summary</label>
+          <div class="col-6">
+            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="Tray Table Latch Broken" disabled="">
+          </div>
+      </div>
+      <div class="form-group">
+        <label for="exampleSelect1">Status</label>
+        <select class="form-control" id="exampleSelect1" disabled="">
+          <option>Not Fixed</option>
+          <option>In Progress</option>
+          <option>Deferred for Future Maintenanace</option>
+          <option>Fixed</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="exampleTextarea">Detailed Description</label>
+        <textarea class="form-control" id="exampleTextarea" rows="3" disabled="">There is a long, wide crack in the latch of the tray table. It is still able to hold up the tray table, however is very weak and should be fixed ASAP. </textarea>
+      </div>
+      <div class="form-group">
+        <label for="exampleInputFile">Picture</label>
+      </div>
+      <div class="form-group">
+        <img src="./traytable.jpeg" alt="Mountain View" style="width:250px;height:250px;margin-top: 0px;">
+      </div>      
+    </form>      
+
+    </div>
+  </div>
+
+
+  </div>
+
+  <!-- Plane Layout -->
+  <div class="tab-pane" id="plane-layout" role="tabpanel">
+    
+    <div class="wrapper">
+      <div class="container">
+        <div id="seat-map" style="box-sizing: content-box;">
+          <div class="front-indicator" style="margin-left: 200px;">Front</div>
+          
+        </div>
+
+        <div class="booking-details" style="margin-top: 100px;">
+        <label>Legend</label>
+          <div id="legend"></div>
+
+  <!--         <h2>Defect Details</h2>
+          
+          <h3> Number of Defects (<span id="count">0</span>):</h3>
+          <ul id="selected-seats"></ul> -->
+          
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+  <!-- Defect Detail -->
+  <div class="tab-pane" id="defect-detail" role="tabpanel"> 
+
+
+  <div class="row">
+    <div class="col-sm-1 col-md-1 col-lg-1"></div>
+
+    <div class="col-sm-3 col-md-6 col-lg-4">
+      <form style="margin: 30px 30px 30px 30px"> 
+      <div class="form-group">
+        <label for="exampleInputEmail1" class="col-6">Defect Summary</label>
+          <div class="col-6">
+            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Give a short summary of the defect">
+          </div>
+      </div>
+      <div class="form-group" >
+        <div class="col-10">
+          <label for="exampleInputPassword1">Action Taken</label>
+          <input type="password" class="form-control" id="exampleInputPassword1" placeholder="State what action was taken">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="exampleSelect1">Status</label>
+        <select class="form-control" id="exampleSelect1">
+          <option>Fixed</option>
+          <option>In Progress</option>
+          <option>Deferred for Future Maintenanace</option>
+          <option>Not Fixed</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="exampleTextarea">Detailed Description</label>
+        <textarea class="form-control" id="exampleTextarea" rows="3" placeholder="Please describe any details of the defect"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="exampleInputFile">Upload Picture</label>
+        <input type="file" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp">
+        <small id="fileHelp" class="form-text text-muted">Upload picture of fixed defect</small>
+      </div>
+      <fieldset class="form-group">
+        <label>Updated Status</label>
+        <div class="form-check">
+          <label class="form-check-label">
+            <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+              Fixed
+          </label>
+        </div>
+        <div class="form-check">
+        <label class="form-check-label">
+            <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="option2">
+              Not Fixed
+          </label>
+        </div>
+        <div class="form-check disabled">
+        <label class="form-check-label">
+            <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios3" value="option3">
+            Deferred for later
+          </label>
+        </div>
+      </fieldset>
+<!--       <div class="form-check">
+        <label class="form-check-label">
+          <input type="checkbox" class="form-check-input">
+          Check me out
+        </label>
+      </div> -->
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>      
+    </div>
+    <div class="col-sm-9 col-md-6 col-lg-8">
+    </div>
+  </div>
+
+
+
+  </div>
+  
+  <div class="tab-pane" id="settings" role="tabpanel">
+
+  <div class="col-sm-7 margin-top-3">
+
+    <h2>Defect List</h2>
+    <div class="table-responsive">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Defects</th>
+          </tr>
+        </thead>
+        <tbody id="defect-rows">
+        </tbody>
+      </table>
+    </div> 
+
+    <h2>Defect List 2</h2>
+    <div class="table-responsive">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Defects</th>
+          </tr>
+        </thead>
+        <tbody id="defect-rows-airline">
+        </tbody>
+      </table>
+    </div> 
+
+  </div>
+  <div class="col-sm-offset-1 col-sm-4 margin-top-3">
+
+    </div> -->
+
+    <div class="row margin-top-3">
+      <h2>Add Defect</h2>
+      <div class="col-sm-12">
+        <input type="text" id="add-defect", class="col-sm-8" placeholder="Enter the Defect" />&nbsp;
+        <input type="text" id="add-id", class="col-sm-8" placeholder="Airline ID" />&nbsp;        
+        <a href="#" onclick="addDefect2()" class="btn btn-primary">Add Defect</a>
+        <a href="#" onclick="getDefectList()" class="btn btn-primary">Get Defect List</a>        
+      </div>
+    </div>  
+
+    <div class="row margin-top-3">
+      <h2>Add Airline</h2>
+      <div class="col-sm-12">
+        <input type="text" id="add-airline-sn", class="col-sm-8" placeholder="Serial Number" />&nbsp;
+        <input type="text" id="add-airline-type", class="col-sm-8" placeholder="Model Type" />&nbsp;
+        <input type="text" id="add-airline-info", class="col-sm-8" placeholder="Additional Info" />&nbsp;
+        <a href="#" onclick="addAirline()" class="btn btn-primary">Add Airline</a>
+
+        <input type="text" id="get-airline-id", class="col-sm-8" placeholder="Enter Airline Id" style="margin-top: 20px;" />&nbsp;
+        <a href="#" onclick="getAirlineDetails()" class="btn btn-primary">Get Airline Details</a>          
+
+        <div class="voter-details row text-left">
+          <div id="display-airline-sn" class="margin-top-3 col-md-12"></div>
+          <div id="display-airline-type" class="margin-top-3 col-md-12"></div>
+          <div id="display-airline-info" class="margin-top-3 col-md-12"></div>     
+          <div id="display-airline-defects" class="margin-top-3 col-md-12"></div>                    
+        </div>
+
+      </div>
+    </div>  
+
+  </div>
+
+  </div>
+
+
+  
+</div>
+
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title" id="modal-title">Seat Number 1B</h4>
+      </div>
+      <div class="modal-body">
+        <ul>
+        <li id="modal-sub-title">Defect 1</li>
+          <ul>
+            <li id="modal-item-1">Tray Table Latch Broken</li>
+            <li id="modal-item-2">Status: Not Fixed</li>
+            <li id="modal-item-3">There is a long, wide crack in the latch of the tray table. It is still able to hold up the tray table, however is very weak and should be fixed ASAP. </li>
+          </ul>
+        </ul>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" id="update-button" data-dismiss="modal">Update</button>      
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<!-- <div id="footer"></div> -->
+
+</body>
+
+<script src="https://cdn.rawgit.com/ethereum/web3.js/develop/dist/web3.js"></script>
+<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="./index.js"></script>
+<script src="./jquery.seat-charts.js"></script>
+
+
+    <script>
+      var firstSeatLabel = 1;
+    
+      $(document).ready(function(dataset) {
+
+      let defectData = [
+        ['3A', 'defect1', 'Tray Table Latch Broken', 'Not Fixed', 'There is a long, wide crack in the latch of the tray table. It is still able to hold up the tray table, however is very weak and should be fixed ASAP. ', 'additional info here'],
+        ['4D', 'defect2', 'Reading Light Not Working', 'Not Fixed', 'The top/ceiling reading light is not working when the swich is pressed', 'additional info here'],
+        ['6J', 'defect3', 'Seat Cushion Stained', 'Not Fixed', 'All the seat cushions are dirty due to a passenger vommitting on it. ', 'additional info here'],
+        ['14B', 'defect4', 'Entertainment System Not Working', 'Not Fixed', 'Unable to turn on or power up entertainment system. ', 'additional info here'],
+        ['14C', 'defect5', 'Foot Rest Broken', 'Not Fixed', 'The left hinge on the foot rest is broken, causing it to be slanted to one side', 'additional info here'],
+        ['3A', 'defect1', 'Tray Table Latch Broken', 'Not Fixed', 'There is a long, wide crack in the latch of the tray table. It is still able to hold up the tray table, however is very weak and should be fixed ASAP. ', 'additional info here'],
+        ['4D', 'defect2', 'Reading Light Not Working', 'Not Fixed', 'The top/ceiling reading light is not working when the swich is pressed', 'additional info here'],
+        ['6J', 'defect3', 'Seat Cushion Stained', 'Not Fixed', 'All the seat cushions are dirty due to a passenger vommitting on it. ', 'additional info here'],
+        ['14B', 'defect4', 'Entertainment System Not Working', 'Not Fixed', 'Unable to turn on or power up entertainment system. ', 'additional info here'],
+        ['14C', 'defect5', 'Foot Rest Broken', 'Not Fixed', 'The left hinge on the foot rest is broken, causing it to be slanted to one side', 'additional info here'],
+        ['3A', 'defect1', 'Tray Table Latch Broken', 'Not Fixed', 'There is a long, wide crack in the latch of the tray table. It is still able to hold up the tray table, however is very weak and should be fixed ASAP. ', 'additional info here'],
+        ['4D', 'defect2', 'Reading Light Not Working', 'Not Fixed', 'The top/ceiling reading light is not working when the swich is pressed', 'additional info here'],
+        ['6J', 'defect3', 'Seat Cushion Stained', 'Not Fixed', 'All the seat cushions are dirty due to a passenger vommitting on it. ', 'additional info here'],
+        ['14B', 'defect4', 'Entertainment System Not Working', 'Not Fixed', 'Unable to turn on or power up entertainment system. ', 'additional info here'],
+        ['14C', 'defect5', 'Foot Rest Broken', 'Not Fixed', 'The left hinge on the foot rest is broken, causing it to be slanted to one side', 'additional info here'],        
+      ]
+
+$('tr').click( function(e) {
+  var defectId = $(this).attr("class").split('defectData')[1];
+  $("#exampleInputEmail1").val(defectData[defectId][2]);
+  // $("#exampleSelect1").val(defectData[defectId][3]);
+  $("#exampleTextarea").val(defectData[defectId][4]);
+});
+
+$('#update-button').click( function(e) {
+  console.log('update button clicked')
+  // $('#myTab a[href="#defect-detail"]').tab('show');
+  setTimeout(function(){ 
+    $('#defect-detail-page').trigger('click');
+    console.log('test');
+  }, 1000);
+
+});
+
+
+        var dataset = [
+          ['id1', 'defect1', 'airlinenumber1', 'info1', 'infoo1', 'infooo1'],
+          ['id2', 'defect2', 'airlinenumber2', 'info2', 'infoo2', 'infooo2'],
+          ['id3', 'defect3', 'airlinenumber3', 'info3', 'infoo3', 'infooo3']
+        ];
+
+        var $cart = $('#selected-seats'),
+          $count = $('#count'),
+          // $total = $('#total'),
+          sc = $('#seat-map').seatCharts({
+          map: [
+            'eef_eeee_eee',
+            'eff_ffee_eee',
+            'efe_efee_eee',
+            'eee_eeee_eee',
+            'eee_eefe_eef',
+            'fee_efee_efe',
+            'eee_eeee_eee',
+            'eee_eeee_eee',
+            'eee_eeee_eee',
+            'fee_eeee_efe',
+            'fee_fefe_eee',
+            'eee_eeef_eee',
+            'eef_eeee_eee',
+            'eee_eeee_fee',
+            'eef_eeee_eee',
+            'eee_eeee_eee',
+            'eee_eeee_eee',
+            'eef_efee_eee',            
+            'efe_eeee_eee',
+            'fef_eeee_eee',
+            'eee_eeee_eff',
+            'eef_eeee_eee',
+            'eee_eeee_eee',              
+          ],
+          seats: {
+            f: {
+              info1   : 'some info here 1',
+              info2   : 'some info here 2',
+              info3   : 'some info here 3',
+              classes : 'priority-1', //your custom CSS class
+              category: 'Priority One'
+            },
+            e: {
+              info1   : 'some info here 1',
+              info2   : 'some info here 2',
+              info3   : 'some info here 3',
+              classes : 'priority-2', //your custom CSS class
+              category: 'No Defect'
+            }         
+          
+          },
+          naming : {
+            top : false,
+            getLabel : function (character, row, column) {
+              return firstSeatLabel++;
+            },
+          },
+          legend : {
+            node : $('#legend'),
+              items : [
+              [ 'f', 'tofix', 'High Priority Defect'],
+              [ 'f', 'available',   'Priority One' ],              
+              [ 'e', 'available',   'No Defect']              
+              ]         
+          },
+          click: function () {
+            if (this.status() == 'tofix') {
+
+              console.log(this);  
+              var randomNumber = this.settings.id.split("_")[1];
+              var defectx = defectData[parseInt(randomNumber)];
+              $('#modal-title').html('Seat Number ' + defectx[0]);
+              $('#modal-item-1').html(defectx[2]);
+              $('#modal-item-2').html('Status: ' + defectx[3]);
+              $('#modal-item-3').html(defectx[4]);
+
+
+
+
+              $('#myModal').modal('show'); 
+              //let's create a new <li> which we'll add to the cart items
+              $('<li>'+this.data().category+' Seat # '+this.settings.label+':' 
+                + ' <b>'+this.data().info1+'</b> ' 
+                + ' <b>'+this.data().info2+'</b> ' 
+                + ' <b>'+this.data().info3+'</b> ' 
+                + '</li>')
+                .attr('id', 'cart-item-'+this.settings.id)
+                .data('seatId', this.settings.id)
+                .appendTo($cart);
+              
+              /*
+               * Lets update the counter and total
+               *
+               * .find function will not find the current seat, because it will change its stauts only after return
+               * 'selected'. This is why we have to add 1 to the length and the current seat price to the total.
+               */
+              
+              // return 'selected';
+            } else if (this.status() == 'selected') {
+            
+              //remove the item from our cart
+              $('#cart-item-'+this.settings.id).remove();
+            
+              //seat has been vacated
+              return 'tofix';
+            } else if (this.status() == 'available') {
+              //seat has been already booked
+              return 'available';
+            } else {
+              return this.style();
+            }
+          }
+        });
+
+        //let's pretend some seats have already been booked
+        sc.get(['1_2', '4_1', '7_1', '7_2', '10_6', '12_12', '2_10']).status('tofix');
+    
+    });
+
+    
+    </script>
+
+
+</html>
